@@ -1,0 +1,43 @@
+﻿// Views/Home/Index.cshtml
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Customer List</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var customer in Model)
+                {
+                    <tr>
+                        <td>@customer.Id</td>
+                        <td>@customer.Name</td>
+                        <td>@customer.Email</td>
+                        <td>
+                            <a href="/api/Customer/details/@customer.Id" class="btn btn-info">Details</a>
+                            <a href="/api/Customer/edit/@customer.Id" class="btn btn-warning">Edit</a>
+                            <a href="/api/Customer/delete/@customer.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">No customers found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="/api/Customer/create" class="btn btn-success">Add New Customer</a>
+</div>
